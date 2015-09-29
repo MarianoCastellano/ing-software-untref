@@ -1,2 +1,2 @@
 language: java
-script: "chmod +x .travis.sh"
+script: "chmod +x travis.sh"
