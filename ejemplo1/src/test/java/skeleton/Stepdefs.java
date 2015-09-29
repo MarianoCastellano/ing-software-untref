@@ -3,21 +3,65 @@ package skeleton;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 
 public class Stepdefs {
 
-	@Given("^I have (\\d+) cukes in my belly$")
-	public void I_have_cukes_in_my_belly(int cukes) throws Throwable {
-		Belly belly = new Belly();
-		belly.eat(cukes);
+	private Jugador jugadorUno;
+	private Jugador jugadorDos;
+	private Resultado resultado;
+
+	@Given("^jugadorUno juega PIEDRA$")
+	public void jugadorUno_juega_PIEDRA() throws Throwable {
+		jugadorUno = new Jugador();
+		jugadorUno.elegir(Movimiento.PIEDRA);
 	}
 
-	@When("^I wait (\\d+) hour$")
-	public void i_wait_hour(int arg1) throws Throwable {
+	@Given("^jugadorUno juega PAPEL$")
+	public void jugadorUno_juega_PAPEL() throws Throwable {
+		jugadorUno = new Jugador();
+		jugadorUno.elegir(Movimiento.PAPEL);
 	}
 
-	@Then("^my belly should growl$")
-	public void my_belly_should_growl() throws Throwable {
+	@Given("^jugadorUno juega TIJERA")
+	public void jugadorUno_juega_TIJERA() throws Throwable {
+		jugadorUno = new Jugador();
+		jugadorUno.elegir(Movimiento.TIJERA);
 	}
 
+	@When("^jugadorDos juega PAPEL$")
+	public void jugadorDos_juega_PAPEL() throws Throwable {
+		jugadorDos = new Jugador();
+		jugadorDos.elegir(Movimiento.PAPEL);
+	}
+
+	@When("^jugadorDos juega TIJERA$")
+	public void jugadorDos_juega_TIJERA() throws Throwable {
+		jugadorDos = new Jugador();
+		jugadorDos.elegir(Movimiento.TIJERA);
+	}
+
+	@When("^jugadorDos juega PIEDRA$")
+	public void jugadorDos_juega_PIEDRA() throws Throwable {
+		jugadorDos = new Jugador();
+		jugadorDos.elegir(Movimiento.PIEDRA);
+	}
+
+	@Then("^gana jugadorDos$")
+	public void gana_jugadorDos() throws Throwable {
+		resultado = jugadorUno.jugarContra(jugadorDos);
+		Assert.assertEquals(Resultado.PIERDE, resultado);
+	}
+
+	@Then("^hay empate")
+	public void hay_empate() throws Throwable {
+		resultado = jugadorUno.jugarContra(jugadorDos);
+		Assert.assertEquals(Resultado.EMPATE, resultado);
+	}
+
+	@Then("^gana jugadorUno$")
+	public void gana_jugadorUno() throws Throwable {
+		resultado = jugadorUno.jugarContra(jugadorDos);
+		Assert.assertEquals(Resultado.GANA, resultado);
+	}
 }
