@@ -18,29 +18,33 @@ public class Jugador {
 		}
 
 		if (getMovimiento().equals(Movimiento.PIEDRA)) {
-			if (adversario.getMovimiento().equals(Movimiento.PAPEL)) {
-				return Resultado.PIERDE;
-			} else {
-				return Resultado.GANA;
-			}
+			return compararMovimientos(adversario.getMovimiento(), Movimiento.PAPEL);
 		}
 
 		if (getMovimiento().equals(Movimiento.PAPEL)) {
-			if (adversario.getMovimiento().equals(Movimiento.PIEDRA)) {
-				return Resultado.GANA;
-			} else {
-				return Resultado.PIERDE;
-			}
+			return compararMovimientoAdversarioConPiedra(adversario.getMovimiento());
 		}
 
 		if (getMovimiento().equals(Movimiento.TIJERA)) {
-			if (adversario.getMovimiento().equals(Movimiento.PIEDRA)) {
-				return Resultado.PIERDE;
-			} else {
-				return Resultado.GANA;
-			}
+			return compararMovimientos(adversario.getMovimiento(), Movimiento.PIEDRA);
 		}
 
 		return null;
+	}
+
+	private Resultado compararMovimientoAdversarioConPiedra(Movimiento movimientoAdversario) {
+		if (movimientoAdversario.equals(Movimiento.PIEDRA)) {
+			return Resultado.GANA;
+		} else {
+			return Resultado.PIERDE;
+		}
+	}
+
+	private Resultado compararMovimientos(Movimiento movimientoAdversario, Movimiento movimientoAComparar) {
+		if (movimientoAdversario.equals(movimientoAComparar)) {
+			return Resultado.PIERDE;
+		} else {
+			return Resultado.GANA;
+		}
 	}
 }
