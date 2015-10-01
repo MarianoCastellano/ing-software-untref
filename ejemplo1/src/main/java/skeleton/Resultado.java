@@ -2,5 +2,5 @@ package skeleton;
 
 public enum Resultado {
 
-	GANA, PIERDE, EMPATE
+	EMPATE, GANA, PIERDE
 }
