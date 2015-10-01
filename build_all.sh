@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
-cd ejemplo1
+set -e
+cd ejercicio1
 mvn test
