@@ -25,8 +25,8 @@ public class Stepdefs {
 		Assert.assertEquals(estado, juego.getEstado());
 	}
 
-	@And("^me quedan siete vidas$")
-	public void me_quedan_7_vidas() throws Throwable {
-		Assert.assertEquals(7, juego.getVidaDelJugador());
+	@And("^me quedan (\\d+) vidas$")
+	public void me_quedan_7_vidas(int vidas) throws Throwable {
+		Assert.assertEquals(vidas, juego.getVidaDelJugador());
 	}
 }
