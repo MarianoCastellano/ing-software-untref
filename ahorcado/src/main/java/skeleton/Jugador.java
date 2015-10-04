@@ -11,4 +11,8 @@ public class Jugador {
 	public int getVidas() {
 		return vidas;
 	}
+
+	public void decrementarVidas() {
+		vidas--;
+	}
 }

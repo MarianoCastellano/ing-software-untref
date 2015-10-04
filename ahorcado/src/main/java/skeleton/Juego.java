@@ -7,19 +7,19 @@ public class Juego {
 
 	private Jugador jugador;
 	private String palabraSecreta;
-	private Set<Character> letrasArriesgadas = new HashSet<>();
+	private Set<String> letrasArriesgadas = new HashSet<>();
 
 	public Juego(Jugador jugador, String palabraSecreta) {
 		this.palabraSecreta = palabraSecreta.toLowerCase();
 		this.jugador = jugador;
 	}
 
-	public void arriesgar(char letra) {
-		for (char caracter : palabraSecreta.toCharArray()) {
-			char letraArriesgadaEnMinuscula = Character.toLowerCase(letra);
-			if (caracter == letraArriesgadaEnMinuscula) {
-				letrasArriesgadas.add(caracter);
-			}
+	public void arriesgar(String letra) {
+		String letraEnMinuscula = letra.toLowerCase();
+		letrasArriesgadas.add(letraEnMinuscula);
+
+		if (!palabraSecreta.contains(letraEnMinuscula)) {
+			jugador.decrementarVidas();
 		}
 	}
 
@@ -35,7 +35,7 @@ public class Juego {
 		String estadoPalabraSecreta = new String(palabraSecreta);
 
 		for (char letraSecreta : estadoPalabraSecreta.toCharArray()) {
-			if (!letrasArriesgadas.contains(letraSecreta)) {
+			if (!letrasArriesgadas.contains(Character.toString(letraSecreta))) {
 				estadoPalabraSecreta = estadoPalabraSecreta.replace(letraSecreta, '*');
 			}
 		}
