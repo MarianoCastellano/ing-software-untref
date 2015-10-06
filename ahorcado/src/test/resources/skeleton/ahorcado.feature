@@ -28,3 +28,20 @@ Feature: Ahorcado
     Then estado es "aut*"
     When arriesgo "O"
     And me quedan 7 vidas
+
+  Scenario: Arriesgo una letra no acierto y quedo sin vidas.
+    Given la palabra secreta es "auto"
+    When arriesgo "l"
+    Then estado es "****"
+    When arriesgo "s"
+    Then estado es "****"
+    When arriesgo "z"
+    Then estado es "****"
+    When arriesgo "W"
+    Then estado es "****"
+    When arriesgo "P"
+    Then estado es "****"
+    When arriesgo "M"
+    Then estado es "****"
+    When arriesgo "I"
+    And me quedan 0 vidas
