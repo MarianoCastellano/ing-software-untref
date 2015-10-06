@@ -39,6 +39,7 @@ public class Juego {
 				estadoPalabraSecreta = estadoPalabraSecreta.replace(letraSecreta, '*');
 			}
 		}
+
 		return estadoPalabraSecreta;
 	}
 

@@ -17,3 +17,14 @@ Feature: Ahorcado
     When arriesgo "x"
     Then estado es "****"
     And me quedan 6 vidas
+
+  Scenario: Arriesgo todas las letras contenidas en la palabra.
+    Given la palabra secreta es "auto"
+    When arriesgo "a"
+    Then estado es "a***"
+    When arriesgo "u"
+    Then estado es "au**"
+    When arriesgo "T"
+    Then estado es "aut*"
+    When arriesgo "O"
+    And me quedan 7 vidas
