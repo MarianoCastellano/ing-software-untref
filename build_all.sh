@@ -5,3 +5,6 @@ mvn test
 cd ..
 cd ahorcado
 mvn test
+cd ..
+cd batalla-naval
+mvn test
