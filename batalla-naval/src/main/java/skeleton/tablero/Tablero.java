@@ -1,6 +1,5 @@
 package skeleton.tablero;
 
-import skeleton.exception.PosicionOcupadaException;
 import skeleton.barco.Orientacion;
 
 public class Tablero {
@@ -15,7 +14,7 @@ public class Tablero {
 		return grilla[fila][columna];
 	}
 
-	public void posicionarBarco(PosicionBarco posicionBarco) throws Exception {
+	public void posicionarBarco(PosicionBarco posicionBarco) {
 		int columnaInicial = posicionBarco.getColumnaInicial();
 		int filaInicial = posicionBarco.getFilaInicial();
 		Orientacion orientacion = posicionBarco.getOrientacion();
@@ -23,26 +22,29 @@ public class Tablero {
 
 		if (orientacion.equals(Orientacion.HORIZONTAL)) {
 			int columnaFinal = columnaInicial + tamanioBarco;
-			for (int columnaActual = columnaInicial; columnaActual < columnaFinal; columnaActual++) {
-				validarPosicionOcupada(filaInicial, columnaActual);
-			}
-			for (int columnaActual = columnaInicial; columnaActual < columnaFinal; columnaActual++) {
-				grilla[filaInicial][columnaActual] = true;
+			boolean estaOcupada = validarPosicionOcupada(columnaInicial, columnaFinal, filaInicial);
+			if (!estaOcupada) {
+				for (int columnaActual = columnaInicial; columnaActual < columnaFinal; columnaActual++) {
+					grilla[filaInicial][columnaActual] = true;
+				}
 			}
 		} else {
 			int filaFinal = filaInicial + tamanioBarco;
-			for (int filaActual = filaInicial; filaActual < filaFinal; filaActual++) {
-				validarPosicionOcupada(columnaInicial, filaActual);
-			}
-			for (int filaActual = filaInicial; filaActual < filaFinal; filaActual++) {
-				grilla[columnaInicial][filaActual] = true;
+			boolean estaOcupada = validarPosicionOcupada(filaInicial, filaFinal, columnaInicial);
+			if (!estaOcupada) {
+				for (int filaActual = filaInicial; filaActual < filaFinal; filaActual++) {
+					grilla[columnaInicial][filaActual] = true;
+				}
 			}
 		}
 	}
 
-	private boolean validarPosicionOcupada(int fila, int columna) throws Exception {
-		if (grilla[fila][columna]) {
-			throw new PosicionOcupadaException("Posicion ocupada");
+	private boolean validarPosicionOcupada(int inicial, int size, int fija) {
+		for (int actual = inicial; actual < size; actual++) {
+			boolean posicionOcupada = estaPosicionOcupada(fija, actual);
+			if (posicionOcupada) {
+				return true;
+			}
 		}
 		return false;
 	}

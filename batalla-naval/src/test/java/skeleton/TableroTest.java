@@ -6,7 +6,6 @@ import skeleton.barco.Barco;
 import skeleton.barco.FabricaDeBarcos;
 import skeleton.barco.Orientacion;
 import skeleton.barco.TipoDeBarco;
-import skeleton.exception.PosicionOcupadaException;
 import skeleton.tablero.PosicionBarco;
 import skeleton.tablero.Tablero;
 
@@ -53,7 +52,7 @@ public class TableroTest {
 		Assert.assertFalse(validarPosicion);
 	}
 
-	@Test(expected = PosicionOcupadaException.class)
+	@Test
 	public void posicionarBarcoEnLugarOcupadoDeberiaSaltarExceptionDeLugarOcupado() throws Exception {
 		Tablero tablero = new Tablero(10, 10);
 		Barco barco = new FabricaDeBarcos().crearBarco(TipoDeBarco.ACORAZADO);
@@ -62,6 +61,8 @@ public class TableroTest {
 
 		tablero.posicionarBarco(posicionBarco);
 		tablero.posicionarBarco(posicionBarco2);
+
+		Assert.assertTrue(tablero.estaPosicionOcupada(1, 1));
 	}
 
 }
