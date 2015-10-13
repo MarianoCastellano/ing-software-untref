@@ -30,6 +30,10 @@ public class BatallaNaval {
 			return ResultadoDisparo.AGUA;
 		}
 
-		return ResultadoDisparo.BLANCO;
+		if (validarPosicion(fila, columna)) {
+			return ResultadoDisparo.BLANCO;
+		}
+
+		return null;
 	}
 }

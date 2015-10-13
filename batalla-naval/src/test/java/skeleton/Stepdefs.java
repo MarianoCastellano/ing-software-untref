@@ -71,4 +71,9 @@ public class Stepdefs {
 		Assert.assertEquals(resultadoDisparo, ResultadoDisparo.AGUA);
 	}
 
+	@Then("^el disparo dio en el blanco")
+	public void el_disparo_dio_en_el_blanco() throws Throwable {
+		Assert.assertEquals(resultadoDisparo, ResultadoDisparo.BLANCO);
+	}
+
 }
