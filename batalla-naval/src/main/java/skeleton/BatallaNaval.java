@@ -24,4 +24,12 @@ public class BatallaNaval {
 		PosicionBarco posicionBarco = new PosicionBarco(barco, fila, columna, orientacion);
 		tablero.posicionarBarco(posicionBarco);
 	}
+
+	public ResultadoDisparo disparar(int fila, int columna) {
+		if (!validarPosicion(fila, columna)) {
+			return ResultadoDisparo.AGUA;
+		}
+
+		return ResultadoDisparo.BLANCO;
+	}
 }

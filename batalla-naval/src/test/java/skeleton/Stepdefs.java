@@ -12,6 +12,7 @@ import skeleton.tablero.Tablero;
 public class Stepdefs {
 
 	private BatallaNaval batallaNaval;
+	private ResultadoDisparo resultadoDisparo;
 
 	@Before
 	public void before() {
@@ -58,6 +59,16 @@ public class Stepdefs {
 	public void no_hay_barcos_en_posicion(int fila, int columna) throws Throwable {
 		boolean validarPosicion = batallaNaval.validarPosicion(fila, columna);
 		Assert.assertFalse(validarPosicion);
+	}
+
+	@When("^disparo a la posicion (\\d+),(\\d+)$")
+	public void disparo_a_la_posicion(int fila, int columna) throws Throwable {
+		resultadoDisparo = batallaNaval.disparar(fila, columna);
+	}
+
+	@Then("^el disparo dio en el agua$")
+	public void el_disparo_dio_en_el_agua() throws Throwable {
+		Assert.assertEquals(resultadoDisparo, ResultadoDisparo.AGUA);
 	}
 
 }
