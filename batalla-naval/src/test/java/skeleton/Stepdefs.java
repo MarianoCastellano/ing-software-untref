@@ -49,6 +49,11 @@ public class Stepdefs {
 		Assert.assertTrue(batallaNaval.validarPosicion(1, 1));
 	}
 
+	@Then("^posicion intermedia ocupada no se puede ubicar el barco alli$")
+	public void posicion_intermedia_ocupada_no_se_puede_ubicar_el_barco_alli() throws Throwable {
+		Assert.assertTrue(batallaNaval.validarPosicion(2, 6));
+	}
+
 	@Given("^no hay barcos en posicion (\\d+),(\\d+)$")
 	public void no_hay_barcos_en_posicion(int fila, int columna) throws Throwable {
 		boolean validarPosicion = batallaNaval.validarPosicion(fila, columna);
