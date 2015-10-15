@@ -1,10 +1,8 @@
 package skeleton;
 
-import skeleton.barco.Barco;
-import skeleton.barco.FabricaDeBarcos;
-import skeleton.barco.Orientacion;
-import skeleton.barco.TipoDeBarco;
+import skeleton.barco.*;
 import skeleton.tablero.PosicionBarco;
+import skeleton.tablero.ResultadoDisparo;
 import skeleton.tablero.Tablero;
 
 public class BatallaNaval {
@@ -26,14 +24,6 @@ public class BatallaNaval {
 	}
 
 	public ResultadoDisparo disparar(int fila, int columna) {
-		if (!validarPosicion(fila, columna)) {
-			return ResultadoDisparo.AGUA;
-		}
-
-		if (validarPosicion(fila, columna)) {
-			return ResultadoDisparo.BLANCO;
-		}
-
-		return null;
+		return tablero.disparar(new Posicion(fila, columna));
 	}
 }

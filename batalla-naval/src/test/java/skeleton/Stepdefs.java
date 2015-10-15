@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import skeleton.barco.Orientacion;
 import skeleton.barco.TipoDeBarco;
+import skeleton.tablero.ResultadoDisparo;
 import skeleton.tablero.Tablero;
 
 public class Stepdefs {
@@ -42,7 +43,7 @@ public class Stepdefs {
 
 	@Given("^hay un barco en posicion (\\d+),(\\d+)$")
 	public void hay_un_barco_en_posicion(int fila, int columna) throws Throwable {
-		batallaNaval.posicionar(TipoDeBarco.ACORAZADO, fila, columna, Orientacion.HORIZONTAL);
+		batallaNaval.posicionar(TipoDeBarco.LANCHA, fila, columna, Orientacion.HORIZONTAL);
 	}
 
 	@Then("^posicion ocupada no se puede ubicar el barco alli$")
@@ -61,6 +62,11 @@ public class Stepdefs {
 		Assert.assertFalse(validarPosicion);
 	}
 
+	@Given("^hay un barco \"(.*?)\" en posicion (\\d+),(\\d+)$")
+	public void hay_un_barco_en_posicion(TipoDeBarco tipoDeBarco, int fila, int columna) throws Throwable {
+		batallaNaval.posicionar(tipoDeBarco, fila, columna, Orientacion.HORIZONTAL);
+	}
+
 	@When("^disparo a la posicion (\\d+),(\\d+)$")
 	public void disparo_a_la_posicion(int fila, int columna) throws Throwable {
 		resultadoDisparo = batallaNaval.disparar(fila, columna);
@@ -68,12 +74,17 @@ public class Stepdefs {
 
 	@Then("^el disparo dio en el agua$")
 	public void el_disparo_dio_en_el_agua() throws Throwable {
-		Assert.assertEquals(resultadoDisparo, ResultadoDisparo.AGUA);
+		Assert.assertEquals(ResultadoDisparo.AGUA, resultadoDisparo);
 	}
 
 	@Then("^el disparo dio en el blanco")
 	public void el_disparo_dio_en_el_blanco() throws Throwable {
-		Assert.assertEquals(resultadoDisparo, ResultadoDisparo.BLANCO);
+		Assert.assertEquals(ResultadoDisparo.BLANCO, resultadoDisparo);
+	}
+
+	@Then("^el barco ha sido hundido$")
+	public void el_barco_ha_sido_hundido() throws Throwable {
+		Assert.assertEquals(ResultadoDisparo.HUNDIDO, resultadoDisparo);
 	}
 
 }
